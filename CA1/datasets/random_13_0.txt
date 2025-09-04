@@ -1,14 +1,14 @@
 K: 6
-P P R R P T E E R E T E R
-P E T T R P P E R P T T R
-T E E T E P R P R E P R P
-P R E T R P E T T R R P R
-T T T T P P T E P E T T P
-E R R E P P T P R P T P T
-P R P E R E E R R R T R R
-T R E R P P T T P P T P E
-E R E E T R T P T R E T R
-T P P R P E R E P P E E R
-P E E T R E P T P P E P T
-E P E T P E T P P R R T P
-R P T E E P T E R P E T R
+P R T T R R T R T E E T R
+P R R R R P T T R P E P R
+E P T E T R R T E P R T P
+T P T E R E E T R R P R R
+R T R E R T R P R P P R T
+R T E P T T R T P R R P P
+E T P P P R P R E R R T P
+R R P T T T P E T E R E T
+R R T E P T R E T E P E P
+E T E E R E E P T E E T E
+R P E E T R P E E P R T P
+P P T R P R P T T P R P R
+P T R P E R R E R R R E T
