@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import time
 from itertools import combinations
 
+
 elements = ['P', 'T', 'R', 'E']
 datasets = {}
 bias_weights = {
@@ -36,7 +37,8 @@ def create_datasets(size, trials=3):
                 print(weights)
                 print(type(weights))
                 grid = [[random.choices(elements, weights=weights)[0] for _ in range(size)] for _ in range(size)]
-                K = random.randint(1, max(2, size // 3))
+                # K = random.randint(1, max(2, size // 3))
+                K=size//2
                 filename = f'datasets/{bias}_{size}_{trial}.txt'
                 with open(filename, 'w') as f:
                     f.write(f"K: {K}\n")
@@ -70,53 +72,7 @@ def save_results(results_dict):
         bias_df.to_csv(f"results_{bias}.csv", index=False)
 
 
-# def implement_greedy_approach(M, K):
-#     start_time = time.time()
-#     caught = 0
-#     grid = [row[:] for row in M]
-#     catch_log = []
-#
-#     for col in range(len(grid[0])):
-#         police = []
-#         thieves = []
-#         for row in range(len(grid)):
-#             if grid[row][col] == 'P':
-#                 police.append(row)
-#             elif grid[row][col] == 'T':
-#                 thieves.append(row)
-#         police.sort()
-#         thieves.sort()
-#         p_idx = t_idx = 0
-#         while p_idx < len(police) and t_idx < len(thieves):
-#             if abs(police[p_idx] - thieves[t_idx]) <= K:
-#                 caught += 1
-#                 grid[thieves[t_idx]][col] = 'C'
-#                 catch_log.append(
-#                     f">>Thief at ({thieves[t_idx]}, {col}) was caught by Police at ({police[p_idx]}, {col})")
-#                 p_idx += 1
-#                 t_idx += 1
-#             elif police[p_idx] < thieves[t_idx]:
-#                 p_idx += 1
-#             else:
-#                 t_idx += 1
-#
-#     dir = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-#     for i in range(len(grid)):
-#         for j in range(len(grid[0])):
-#             if grid[i][j] == 'T':
-#                 rookies = []
-#                 for di, dj in dir:
-#                     ni, nj = i + di, j + dj
-#                     if 0 <= ni < len(grid) and 0 <= nj < len(grid[0]) and grid[ni][nj] == 'R':
-#                         rookies.append((ni, nj))
-#                 if len(rookies) >= 3:
-#                     caught += 1
-#                     grid[i][j] = 'C'
-#                     for k in range(3):
-#                         ri, rj = rookies[k]
-#                         grid[ri][rj] = 'U'
-#                     catch_log.append(f">>Thief at ({i}, {j}) was caught by Rookies at {rookies[:3]}")
-#     return caught, time.time() - start_time, catch_log
+
 def implement_greedy_approach(M, K):
     start_time = time.time()
     caught = 0
@@ -188,51 +144,6 @@ def implement_greedy_approach(M, K):
 
     return caught, time.time() - start_time, catch_log
 
-# def implement_brute_force_approach(M, K):
-#     start_time = time.time()
-#     grid = [row[:] for row in M]
-#     catch_log = []
-#
-#     police_caught = 0
-#     for col in range(len(grid[0])):
-#         police = []
-#         thieves = []
-#         for row in range(len(grid)):
-#             if grid[row][col] == 'P':
-#                 police.append(row)
-#             elif grid[row][col] == 'T':
-#                 thieves.append(row)
-#         used_police = set()
-#         used_thieves = set()
-#         for p in police:
-#             for t in thieves:
-#                 if abs(p - t) <= K and p not in used_police and t not in used_thieves:
-#                     police_caught += 1
-#                     used_police.add(p)
-#                     used_thieves.add(t)
-#                     catch_log.append(f">>Thief at ({t}, {col}) was caught by Police at ({p}, {col})")
-#                     break
-#
-#     dir = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-#     rookie_caught = 0
-#     thief_positions = [(i, j) for i in range(len(grid)) for j in range(len(grid[0])) if grid[i][j] == 'T']
-#     for i, j in thief_positions:
-#         rookies = []
-#         for di, dj in dir:
-#             ni, nj = i + di, j + dj
-#             if 0 <= ni < len(grid) and 0 <= nj < len(grid[0]) and grid[ni][nj] == 'R':
-#                 rookies.append((ni, nj))
-#         if len(rookies) >= 3:
-#             for combo in combinations(rookies, 3):
-#                 if all(grid[r][c] == 'R' for r, c in combo):
-#                     rookie_caught += 1
-#                     for r, c in combo:
-#                         grid[r][c] = 'U'
-#                     catch_log.append(f">>Thief at ({i}, {j}) caught by Rookies at {combo}")
-#                     break
-#
-#     total_caught = police_caught + rookie_caught
-#     return total_caught, time.time() - start_time, catch_log
 
 
 def implement_brute_force_approach(matrix, dist_limit):

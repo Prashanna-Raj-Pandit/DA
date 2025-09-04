@@ -1,13 +1,13 @@
-K: 2
-P P P E P P P P P P P P
-T T R P P T P E R P E T
-P E P P E P P P R P R P
-P E P T P P R R P P P P
-P P E R R P T P P P P P
-P R P P P P P P T R P P
-R P P P P P P P P P E P
-P P T R R P T P P P P T
-R P R P P P P E P P P E
-R P T P P P P R E P P P
-P P P R P P P E P P E P
-P T P P P T P P P P P P
+K: 6
+P T P T P P T P P E P P
+P P P P P E R P P P T P
+P P P P E P T T E P P P
+P P E P E P P P P P P P
+P P P P P P P P T P P P
+P P P P R P P P P P P P
+E T P E P T T P E P R P
+P E E T P P P P P T P P
+P P E R P E P P P P P P
+P T P P P P P T P E P P
+P P P P P P P P P P P R
+P P P P R E P P P P P R

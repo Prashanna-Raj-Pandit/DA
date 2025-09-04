@@ -1,10 +1,10 @@
-K: 3
-P R R E P R T R R
-P R R E E R R R R
-R R R P R R R R R
-R R R R R R R P T
-R T R R P T R R R
-R R R T R R P R R
-R P R E R R R E P
-R R P R R R R R E
-E P T R T R R T R
+K: 4
+P E R E R R R T R
+R R R R R R R R R
+R E P R R P R R R
+R T R T R R R T R
+R P R T T R R R R
+R P R R R R R R R
+R P R P R E R P P
+R R P E R R R R R
+R T R R R R R E R

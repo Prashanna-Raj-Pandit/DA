@@ -1,9 +1,9 @@
-K: 2
-P P T P P E P P
-P P T P P P P P
-P P E P P P P P
-E P P R P P P P
-P P R P P E P R
-E P E P P R P P
-P P P P P T P T
-P P P T P P P P
+K: 4
+P P P R P P P P
+P P P T P P P R
+P P R P E P P P
+P P P E P R T P
+E P P P P T P P
+E P T P P P P P
+P P E P P P P E
+P R P T P P P T

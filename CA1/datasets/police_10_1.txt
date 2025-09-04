@@ -1,11 +1,11 @@
-K: 3
-P E P P E R T R P P
-P P P P P P R P P P
-P P R P E R P R P P
-T P T P P P P T P R
-P P P P P P P P T P
-R P P P P P R P E P
-R P P P P P P P P T
-P P P T P P P P P P
-P P P E P P P P P P
-P T P P P P P T R P
+K: 5
+T P P P E P T P P R
+T T P P P R E P P P
+T P P P R P E P R R
+P P P P P P P R P P
+P P E P P P P R P P
+P R P P P P P P P P
+P P P P T T P P P R
+P P P P E P P P P P
+P E P R T T P P P P
+P E P T P E P R P P

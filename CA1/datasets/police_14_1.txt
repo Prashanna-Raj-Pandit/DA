@@ -1,15 +1,15 @@
-K: 2
-P R T P P T T P R P P P P E
-P P P P P P R P P R P P R P
-P E P T P P P P T P P E P P
-E P P P P T T R P P P P T P
-P P P P P T P P P P P P P T
-P P P E T P P P P R P P E P
-T T P T P P P P R R P P P P
-T P P P R P R P T E P P P P
-P P P P P R P E P P P P P E
-R E P P P R E P P P P P E P
-R P P T T P E P P P T P P P
-P P E P R P P P P T P P E P
-P T R P P P P T E R R P P P
-R E T R P T P P P E P P P P
+K: 7
+R P P P P P P P E T P P P E
+R P P P R P P P P P P E E R
+P P P P R P T P T P P P P P
+E P E P P P P P P E P E P P
+P R P P P P R P R P P P P R
+T P P T P P P P E T E R P P
+P P P P P P P P P T P P P P
+E E P P P P R P P T R P T P
+P P P P T T P E P P T R P P
+R P E P R R P P R T R T P P
+P P R P P R P T T E P E E P
+T R P P P P P P R T P P P E
+T P R P P T P E P P P P P P
+P P P R E P P P P E P P R E

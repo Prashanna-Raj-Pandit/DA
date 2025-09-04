@@ -1,12 +1,12 @@
-K: 1
-R R R R R E R R R E R
-E R R R R R P R R R R
-R R T R R R E R R R R
-E R E R P R R R P R R
-R R R R R R R R R R T
-R R R R R R R R R R R
-E R R R T R R R E T R
-T R R R R P T T R R R
-P E R R R P E R R E R
-R R R T R R R R R P T
-E R E R R R E R T P R
+K: 5
+R P R T R P R R P R P
+R R P R R R R R R R T
+R P T R R R R R R E R
+R E R E R R R R R R R
+R T R R R R E R R R P
+R T R R R E R R R T R
+R E R R R R E R R T R
+R R R R P R R P R E R
+R R R R R R T P R R R
+R R R R R T R R R E P
+R R E R R T R R R R R
