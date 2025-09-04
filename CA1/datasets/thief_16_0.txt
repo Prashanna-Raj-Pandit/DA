@@ -1,17 +1,17 @@
-K: 3
-E T T T T T T T T T T T T T T R
-T T T P T T E T E T P P R T E P
-R T T R P T T P P T T P T R T T
-T T T P T T T P T T T T P T T T
-T T T T P E R T P T T T T P T T
-E T T E E T T P T T T T T T T T
-T R T T P T T E E R T T T T T R
-T T P T T T T R T R T T R T T T
-T E T T T T T T T R P T R T T T
-P R R R T P T T T R T T T T T T
-T T T T E R T T T P E T T P T R
-E T R R T T R T P P T E P T T E
-T T P T E E T T T T R T T E R T
-P T T T R T T T T T T R E E P T
-T T T T R T T T T T P R T R T P
-T T T T T R T P T T T R T E P T
+K: 4
+T T T T T T T E T T R T T T T P
+T T T P E T T P T E P T E T T P
+T T T T T T T T T T R T R T E T
+R R T E T T E T P T T T P T T P
+T T T R P T T T P T R E T P R R
+T T T T T T T T T T E T T T T T
+E E T T T T T T T P T T T T T T
+T T T T E T E T R T E T T T T R
+P T T T T T E T E T T T T E T T
+T T P T T T T P E T T T R T P T
+T E T T T T E R T T T T T T T R
+T T T T T T T T T R T T T T T T
+T T T R T T P T T T T T R T T E
+T P T T R T T E R T P T R T T T
+E T T R E R T T T T T T T T E T
+P R T T R E T E T T T T T T P T

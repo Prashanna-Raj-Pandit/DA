@@ -1,10 +1,10 @@
-K: 1
-E P P P P P P P E
-P T P T R P T P E
+K: 2
+P E P E P P P P P
+P P E P P E P T T
+R E P R P P P R T
+R P P E E R P T P
+P R P P P P P P P
+P P E P P P P P P
 P P P P P P P P P
-P P R P P P T E P
-T R P R P P R R P
-P R T P P P P P P
-P P P P T P P P T
-R R P P P T P P P
-P P P P P P E P P
+P P P P T P P P E
+P E P E P P P P R

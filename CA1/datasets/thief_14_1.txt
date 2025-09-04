@@ -1,15 +1,15 @@
-K: 2
-T T T R T R E T P T T T E T
-P E E T T T T T R T E P E E
-E E T R T T T R R T T T R T
-R P E T T R T T R T T T T T
-T E P E P T T P R T T T P T
-T T T T T T T T P T E P T P
-T T T T T E T E R T T T T T
-T T T T T T T T T T T T T T
-P T T E T T T R E T T T T P
-T T T E P T P T T T R T T T
-T T R T P E T P R T T T P P
-T T T T T T T T T T T T T T
-P T R T T T T E T T T T T T
-T R T T E R T T T T R T T T
+K: 1
+T E T T T E E T E R R T T T
+T T R T T T T T T T T T T T
+T T T R T T T T T T T T E T
+P T P P T T T T T T T T T T
+P T P R T T T T T T T T T T
+P T T T T R P T P T R T T T
+T T T P T T P R R T T E P R
+T T T T T T T P T T P T T T
+T R T T E T T T T T T T T E
+E T T R T R T R T E T R P T
+T T P T T T E T E R P P T T
+T E T T E T T T T T E R T T
+T T T P T R T T P T T T T T
+P P R T P T P T E T T T T T

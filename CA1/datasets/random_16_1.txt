@@ -1,17 +1,17 @@
-K: 3
-E P E E T E R T P T P E P P E P
-E R E P E T R T P R T E R T E E
-T R R E P P R E E R P P P T R T
-R P P T P E T P R P R R R T P P
-E P T P P E R P P R R E P R T E
-R T T P R E E R E P T R E E E R
-P R T P T R T R E E E T T P E T
-T E T R E R P T T E R P T R T R
-P R T T T T R T E R E R E R P R
-R P P R E R E T T P E P P T T E
-E R R E T E P P E R R R R R T E
-R T P P R P P T P T R P T E T R
-P T R T T T R P E P E R E P P T
-E R T E P E T P E E R E P E E P
-R P E E R P T P E R P E P T P R
-E T E R R T E E T T P E T E R R
+K: 5
+E P P R E E E E E T T E E P R P
+E R E T T T E T R E T E T R R R
+P E T R R P E P E P P E E P E E
+T T P R P R T E T P R E E E R P
+P P T T R E E P P P E T E P T P
+E P R T E P E T T E T R T T T E
+E R R P R E E E E R P E P R T P
+T R P R E R R R E R E E P P T R
+R R E R P R T R P R E E E R P R
+P T R T T T R T R E R R R E R R
+P R R R E T R T T T E P R T T P
+E E T R P R E R T E R R P R R T
+E P R R R T R R P E P R T E P T
+R T P R R T T E T R T R R E T E
+E P T E R E E R T T E E R P R R
+R E E P R T T E R T T R P T P R

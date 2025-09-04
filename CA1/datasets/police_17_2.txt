@@ -1,18 +1,18 @@
-K: 4
-P P E T P P P P P P P P P T E T P
-P P P P P P R P E P R P P P T P P
-R T P E P P P P E T P P P P P P R
-P R P P P P P P P E P P P R R P P
-P P P P P T P P P P R T P T P P P
-P T P E P P T P P P P P T P P P P
-P P P R T E P T R P P R P T E P P
-P P E P T R P T T R R P P P P P P
-P P P P E P P P P R P T P P P P P
-P P P P P P P R P P P P E R T P P
-P P R P T P P E P P E P P P P E P
-P P P P E P P E R P P P P P P P P
-P R T P T R P P P P P P P P R P T
-P P P P E P P E E P T P R P P P P
-T E T P P T P P R R P P P P P P P
-P P P P P T P E T P P P P P P R E
-P P P E P P P P E P R P P T E P P
+K: 1
+P P R P R P P P P P P P P P R E P
+E P P P E P P E P P P T P T P P P
+P E P T T T E T T E E P P P P E P
+P R P P P P P P P P P P E P P T E
+P P T E P T P P P P T R P R P T P
+T T R E P P P P P P R P P P P P E
+P P P P P P P R P P P R P R P P E
+T P P P P R E P P P P P P R T E R
+E P E T P E E P T R P T P R E P R
+P P P P P T P T E P R P P P P E P
+P P P P P P P T P R P P P P P P P
+P P P P E P P P P P P P P R P P P
+R P P P P E P E P P T P P P P P E
+P P P P P E P P P P P P E T P R T
+P P P P P P P P P P E E R P P T R
+P P R P P P R T P R P R P R P P T
+P P E R T P R P P P P P P P T E R

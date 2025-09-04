@@ -1,10 +1,10 @@
-K: 3
-E T E P P T T T R
-T R E R E P R T P
-R P P R P R T E R
-R E E E P P R P P
-P T T R E E P T E
-P R P P R R P P P
-P T R P T T R R P
-R T T T T T R T E
-T E P P E T R P R
+K: 2
+T E T E T R E R E
+T R E E E R T R P
+R P T T R R P E P
+E E T E E R R R R
+R P P E E R E P P
+P R P E P P R E R
+P P E E R T E E T
+E R E P E R R T E
+R P P E R T R P R

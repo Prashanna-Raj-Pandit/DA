@@ -1,18 +1,18 @@
-K: 1
-T T P E T T R E P T T T T T E T T
-T T T T T P T T T E T R P P E T T
-T T T E P T T T T T R T T T T T E
-T T P R T T T E P R R T R T T T T
-T T P T T T R T T T T T E T R P E
-T T T T T T T P T T T T E T P T T
-T T P T T T T T T R T T P E T T E
-R T T R P T T T T P T T E T T P T
-R R R T T T E T T T T R T T T T E
-T T T R T T T T T T P E T T T E P
-T T T T E T T T T T T T T T T T P
-T T P T T E T T E T E E E T T T E
-E T R T R T P T T T T T R T T T T
-T T T T T T T T P P P R T T T R T
-P T T T P T T E T T E T P T T R P
-P T E T T T R T T P T T T T E T P
-P T T T E T T P T T T P T R T E P
+K: 2
+T T T T P T P T P T T T T T T T T
+E T T R T P T P T T T T R T E T E
+T T T R T T T T P T R T T T T T T
+T E T T T P T T T R T E P T T P R
+T T T T T T T P T P T R T T R R T
+T T T T R T E R T T R T R T T T T
+T R T T T T T E T T T E T T R P T
+T T T T T P T T T E T T T T P T T
+P T T T T T T P P T T T T T T E T
+T E T T E T T T T T R T T T T T T
+T T T T R T T T T T T P T P T E T
+E P T R T T T R P T P T R T T T T
+T T T T T T T T E T T E T R E T T
+P R T E P P T T T T E R T E T T T
+T T T T T T T T E T T P P T E T P
+T P T T T T T T T T T T T T P P T
+T T T T P T E T T T T T T T T E E
