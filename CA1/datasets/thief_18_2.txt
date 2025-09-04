@@ -1,0 +1,19 @@
+K: 5
+R T E E T E T P T T P T R T T T T R
+E P T E T R T T T T T T T T R T P T
+T T T T R T T T T T T T T T T T P T
+E E R E T R T P T T T E T T P R P T
+R E P T T T T T E T T E T E T T T E
+T T R T T T R R T T E T P T T T T T
+P T T T R T T T T T R T T T R P T T
+T T R T T T E T R E T T T T E R T T
+E T T T E T T T T T T T R T R R T T
+T E P T E T T T T T T T T T T T T T
+T T P T P T T P T T T T T T T T P T
+T T R R T T T T E T T T R T E R T T
+T T T R T T R P R T E P T T R T T T
+T T R E T T T T T T T T T T T T T T
+T T R R T T E T T T T T T T T T E T
+T E P E T T T T T T T T E T T T T E
+E T T T T T T T P T T T T T T T T T
+R T T T T T T T T E P T T T T T T R

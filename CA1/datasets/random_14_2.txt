@@ -1,0 +1,15 @@
+K: 4
+R R T P T T P E E T E P R T
+P P R T E R T P T E P P E P
+R P T P E R P P P E P P T P
+P E R R P T T E E E T T P P
+R E P P T R R P T R E R R R
+R P T R T R R T T E T R T E
+E P E E P R P T P R P P E R
+E E P P P E T P R E R P E R
+T P P R R T P E P E T R R P
+T R R P T T E E P P P P T R
+E E T T P R T T T E E P R T
+P P E T R R P R R T T P P T
+R P E T R R T E T T T R T T
+P R R T E T E T P P P E E R

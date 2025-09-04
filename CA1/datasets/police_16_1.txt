@@ -1,0 +1,17 @@
+K: 5
+P P P P P P P P P R P P P P P P
+P T P P T P P E P P P P E P P P
+T T P P T P T P P T R P P E P E
+T T P P P P P P E P P P P P P R
+P R P P E P P R P P P R P R P P
+P P R T R P P P P T T P E P P P
+P P P P P P P E T P P P R T R P
+T P E P T P P P P T P P P P P P
+P R P P P P P P E T T E P P P P
+E P P P P P P P P P P P P P P P
+P E P P E P P E P P P T P P R P
+P R T R P P P P P P P P P P T T
+T P R P P E P P P P R P P P R R
+P P P P R P P E P P P P P P P E
+P P P T P P P P P P P P P P P P
+P P P T P T P T E P P P P P P P

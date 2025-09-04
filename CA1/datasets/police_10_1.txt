@@ -1,0 +1,11 @@
+K: 1
+E P P E P P P E T P
+P R P R P P P P P P
+R P P P P P P P R P
+E P P E P P P R E P
+P P P R T P P T P T
+E P T P P P T P P R
+T P R P P P T P P P
+P P P P T P P P P P
+P P T E P P P P P R
+P P R P P T R P E P

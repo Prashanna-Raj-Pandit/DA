@@ -1,0 +1,15 @@
+K: 2
+R P P T P P P E P P P P P P
+P P R T P P P P T E T P P E
+P T P P P P P P P T P P P P
+P T P R P P P P P P T T E P
+P P P P P R R P T P P P P P
+R P P E P P P T P P P P P P
+P T P P E P P P P P T P P P
+P P R P P P P P P R P P P R
+P P P R P R R P P T P T P P
+P T P P P P P T T P E T P P
+P P P P P P T P P P P P P P
+P P P P T P P P T P P P P P
+P P R P P P P T P P E P P P
+E T P P P P P P R P P R R R

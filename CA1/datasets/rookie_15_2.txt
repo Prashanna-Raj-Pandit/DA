@@ -1,0 +1,16 @@
+K: 1
+R R E E R P R T R R R R P R E
+R E R P R P R R R R P R R R R
+R R P P T R R E R E R R R R E
+R R R T P R R R R T R R T R E
+E R R R P R R T E T T R R E R
+T T E T R R R R P R R R R R R
+R R E R P R E R R P R R P T E
+R R E R P P R T T T R P T R R
+R R R R R E P R E T R R R T R
+R E T R R E P T T E P R R R R
+R R T R E R R E R T R R E R R
+T R R R R R P R R R R R T R R
+R R R R R T R T E R R R R R T
+R R E R R R R T E T R R R R R
+R R R P R R R R R R R T R R R

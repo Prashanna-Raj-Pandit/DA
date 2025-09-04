@@ -1,0 +1,19 @@
+K: 4
+E E E T T P R R P P T T P T E E P P
+P R R E P P P E T P T P P E P E T R
+T R T T P R E R R T E P R T R P R P
+E R T T P E T R R R T R P R E T R T
+P P E P R R R P T E P R R T P P R T
+T T R T T P E T R P R P E P T E P P
+R P E E T T T P R R E T P P E T R T
+E R P R E T R R P E E R P P E E E T
+E T T R T R R R E E E R E R R R T R
+E E R T P R R R T T E R E R E T T P
+E E P R E P P T T E E T P E R E E E
+E E E P E R T T E E P R T R R P E T
+P E R R P R R P T P P E T E P E P T
+T E E T P T E T P E E R E R E T R P
+P E P P P T T R P T E E R R T P E E
+E T R P T E E R T T P P R P R R R R
+E R P T P E T T P T P T E P R E P P
+T T E P E E E E T T P R R P R P T E

@@ -1,0 +1,7 @@
+K: 2
+T P R P P P
+P E P P P P
+P P E P P P
+E P P P P P
+T P P R P P
+R P P P P P

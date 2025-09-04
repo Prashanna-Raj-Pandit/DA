@@ -1,0 +1,18 @@
+K: 3
+P R P T R R T R E R R R R R E R R
+E R R T R R R P R R R P E R R R R
+E R R R T R R R R R R R E R P R R
+T T R P R R R R R R P R R R R R R
+E R E R P R R T E P P R R R R R R
+T R E T R P R T R R R R R T R R E
+R R E T E R R E R R R T R R P R R
+R R R R R R R R R R R E R R T T R
+R R R R R R R R R R E R R T P E R
+R R R R R T E P R R E R R R R R P
+E R R R R E E R R R P R E R R R P
+E R R R R R R T R R R R R E R R R
+R E P R R R R R E R R R R R R R P
+E R T R R R R T R P E R R E R R E
+R P T R R P R R R R R T R R R R P
+R R T T R R R R R R R E R R R T R
+E R R R R R E R R R R E R R R R R

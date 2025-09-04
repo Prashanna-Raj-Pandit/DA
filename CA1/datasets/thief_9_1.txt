@@ -1,0 +1,10 @@
+K: 2
+T T T E P R T T T
+T T R T T T T P P
+T P T T T R T T P
+P T T P T E T P T
+P T T T E R T T T
+T T T R P T P E T
+T P R T T T P E T
+T T T P P T T T T
+T T T T T T P T P

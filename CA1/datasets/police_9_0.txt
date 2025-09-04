@@ -1,0 +1,10 @@
+K: 3
+P P T P R P T T P
+E P P P P E P E T
+T P T P P P P P P
+P P E E P P P R P
+P P T T P P P P P
+P P R P P P P R R
+P P P R P E P P P
+P P P T P P R P E
+R P P P P P P R T
