@@ -52,7 +52,7 @@ def create_datasets(sizes, trials=3):
                 current_weights = bias_weights[bias]
                 grid = [[random.choices(elements, weights=current_weights)[0] for _ in range(size)] for _ in
                         range(size)]
-                K = size // 2  # Fixed K value for main experiments
+                K = random.randint(1, max(2, size // 3))
                 filename = f'datasets/{bias}_{size}_{trial}.txt'
                 with open(filename, 'w') as f:
                     f.write(f"K: {K}\n")
@@ -212,96 +212,6 @@ def PP_ca1(M, K):
     return [(g_count, g_time), (b_count, b_time)]
 
 
-def extra_credit_exp():
-    """Extra Credit Experiment: Varying K values"""
-    print("\n" + "*" * 50)
-    print("\tExtra Credit Experiment: Varying K Values")
-    print("*" * 50)
-
-    results = []
-
-    for K in K_VALUES:
-        for sample, (grid, _) in enumerate(datasets['k_distance'][K]):
-            print(f"\nProcessing 10x10 grid (K={K})")
-            if sample == 0:  # Print sample grid for first sample
-                grid_display(grid)
-
-            # Run both approaches
-            g_count, g_time, g_log = implement_greedy_approach([row[:] for row in grid], K)
-            b_count, b_time, b_log = implement_brute_force_approach([row[:] for row in grid], K)
-
-            # Count police vs rookie catches and extract details
-            g_police_logs = [log for log in g_log if "Police" in log]
-            g_rookie_logs = [log for log in g_log if "Rookies" in log]
-            g_police = len(g_police_logs)
-            g_rookie = len(g_rookie_logs)
-
-            b_police_logs = [log for log in b_log if "Police" in log]
-            b_rookie_logs = [log for log in b_log if "Rookies" in log]
-            b_police = len(b_police_logs)
-            b_rookie = len(b_rookie_logs)
-
-            # Print detailed results for the first sample of each K value
-            if sample == 0:
-                print(f"\n>> K = {K} - Greedy Approach Results:")
-                if g_police > 0:
-                    print(f">> Police catches ({g_police} thieves):")
-                    for log in g_police_logs:
-                        # Extract and reformat the message
-                        message = log.replace(">>Thief at (", "").replace(") was caught by Police at (",
-                                                                          " catch Thief at (")
-                        message = message.replace(")", "").replace(", ", ",")
-                        parts = message.split(" catch Thief at ")
-                        police_pos = parts[0].replace(",", ",")
-                        thief_pos = parts[1].replace(",", ",")
-                        print(f">> Police at ({thief_pos}) catch Thief at ({police_pos})")
-
-                if g_rookie > 0:
-                    print(f">> Rookie squad catches ({g_rookie} thieves):")
-                    for log in g_rookie_logs:
-                        print(f">> {log}")
-
-                print(f"\n>> K = {K} - Brute Force Approach Results:")
-                if b_police > 0:
-                    print(f">> Police catches ({b_police} thieves):")
-                    for log in b_police_logs:
-                        # Extract and reformat the message
-                        message = log.replace(">>Thief at (", "").replace(") was caught by Police at (",
-                                                                          " catch Thief at (")
-                        message = message.replace(")", "").replace(", ", ",")
-                        parts = message.split(" catch Thief at ")
-                        police_pos = parts[0].replace(",", ",")
-                        thief_pos = parts[1].replace(",", ",")
-                        print(f">> Police at ({thief_pos}) catch Thief at ({police_pos})")
-
-                if b_rookie > 0:
-                    print(f">> Rookie squad catches ({b_rookie} thieves):")
-                    for log in b_rookie_logs:
-                        print(f">> {log}")
-
-            results.append({
-                'K': K,
-                'sample': sample,
-                'greedy_time': g_time,
-                'brute_time': b_time,
-                'greedy_caught': g_count,
-                'brute_caught': b_count,
-                'greedy_police': g_police,
-                'greedy_rookie': g_rookie,
-                'brute_police': b_police,
-                'brute_rookie': b_rookie
-            })
-
-    # Save results
-    df = pd.DataFrame(results)
-    agg_df = df.groupby('K').mean().reset_index()
-
-    if not os.path.exists(RESULTS_DIR):
-        os.makedirs(RESULTS_DIR)
-
-    agg_df.to_csv(os.path.join(RESULTS_DIR, 'experiment3_results.csv'), index=False)
-
-
 def save_results(results_dict):
     # Convert the dictionary to a list of records
     records = []
@@ -326,7 +236,6 @@ def save_results(results_dict):
     for bias in results_dict.keys():
         bias_df = df[df['Bias'] == bias]
         bias_df.to_csv(f"results_{bias}.csv", index=False)
-
 
 def visualize_results(results_data):
     colors = {
@@ -394,67 +303,6 @@ def visualize_results(results_data):
     plt.close()
 
 
-def plot_experiment3_results():
-    """Plot results from Extra Credit Experiment (K-values)"""
-    # Load the results
-    results_file = os.path.join(RESULTS_DIR, 'experiment3_results.csv')
-    if not os.path.exists(results_file):
-        print("Extra Credit Experiment results not found. Run experiment first.")
-        return
-
-    df = pd.read_csv(results_file)
-
-    # Create subplots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-
-    # Plot 1: Execution Time vs K values
-    ax1.plot(df['K'], df['greedy_time'], 'o-', label='Greedy Approach', linewidth=2, markersize=8)
-    ax1.plot(df['K'], df['brute_time'], 's-', label='Brute Force Approach', linewidth=2, markersize=8)
-    ax1.set_xlabel('K Value (Maximum Distance)', fontsize=12)
-    ax1.set_ylabel('Execution Time (seconds)', fontsize=12)
-    ax1.set_title('Execution Time vs K Value', fontsize=14)
-    ax1.legend(fontsize=11)
-    ax1.grid(True, alpha=0.3)
-
-    # Plot 2: Thieves Caught vs K values
-    ax2.plot(df['K'], df['greedy_caught'], 'o-', label='Greedy Approach', linewidth=2, markersize=8)
-    ax2.plot(df['K'], df['brute_caught'], 's-', label='Brute Force Approach', linewidth=2, markersize=8)
-    ax2.set_xlabel('K Value (Maximum Distance)', fontsize=12)
-    ax2.set_ylabel('Thieves Caught', fontsize=12)
-    ax2.set_title('Thieves Caught vs K Value', fontsize=14)
-    ax2.legend(fontsize=11)
-    ax2.grid(True, alpha=0.3)
-
-    plt.tight_layout()
-    plt.savefig(os.path.join(RESULTS_DIR, 'experiment3_summary.png'), dpi=300, bbox_inches='tight')
-    # plt.show()
-
-    # Additional detailed plots
-    fig, (ax3, ax4) = plt.subplots(1, 2, figsize=(15, 6))
-
-    # Plot 3: Police vs Rookie catches (Greedy)
-    ax3.plot(df['K'], df['greedy_police'], 'o-', label='Police Catches', linewidth=2, markersize=8)
-    ax3.plot(df['K'], df['greedy_rookie'], 's-', label='Rookie Catches', linewidth=2, markersize=8)
-    ax3.set_xlabel('K Value (Maximum Distance)', fontsize=12)
-    ax3.set_ylabel('Number of Catches', fontsize=12)
-    ax3.set_title('Greedy Approach: Police vs Rookie Catches', fontsize=14)
-    ax3.legend(fontsize=11)
-    ax3.grid(True, alpha=0.3)
-
-    # Plot 4: Police vs Rookie catches (Brute Force)
-    ax4.plot(df['K'], df['brute_police'], 'o-', label='Police Catches', linewidth=2, markersize=8)
-    ax4.plot(df['K'], df['brute_rookie'], 's-', label='Rookie Catches', linewidth=2, markersize=8)
-    ax4.set_xlabel('K Value (Maximum Distance)', fontsize=12)
-    ax4.set_ylabel('Number of Catches', fontsize=12)
-    ax4.set_title('Brute Force Approach: Police vs Rookie Catches', fontsize=14)
-    ax4.legend(fontsize=11)
-    ax4.grid(True, alpha=0.3)
-
-    plt.tight_layout()
-    plt.savefig(os.path.join(RESULTS_DIR, 'experiment3_detailed.png'), dpi=300, bbox_inches='tight')
-    # plt.show()
-
-
 def main():
     grid_sizes = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
     trials = 2
@@ -494,12 +342,8 @@ def main():
             results[bias]['g_caught'].append(sum(greedy_counts) / len(greedy_counts))
             results[bias]['b_caught'].append(sum(brute_counts) / len(brute_counts))
 
-    # Run K-value experiment
-    extra_credit_exp()
-
     # Save results and create visualizations
     visualize_results(results)
-    plot_experiment3_results()
     save_results(results)
 
 

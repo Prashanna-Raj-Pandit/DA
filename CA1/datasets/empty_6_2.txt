@@ -1,7 +1,0 @@
-K: 2
-E E R E E E
-E E E E E R
-E P E P E E
-P P E E E E
-E E E E E E
-R R P E E E

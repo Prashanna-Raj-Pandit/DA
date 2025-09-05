@@ -1,6 +1,0 @@
-K: 1
-E P R T P
-P P R E R
-P E E T T
-E P T T E
-T E T R R

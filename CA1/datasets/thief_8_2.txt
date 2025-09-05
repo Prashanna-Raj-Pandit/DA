@@ -1,9 +1,0 @@
-K: 1
-T T R T E E T T
-T R E T T T T P
-T E T R T T T T
-T T T E T E T P
-E E P T R T P R
-T T T E T P R T
-T T T T T P T T
-T P T T T P T T

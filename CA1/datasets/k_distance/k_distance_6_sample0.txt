@@ -1,0 +1,11 @@
+K: 6
+P R P P E E P R E R
+E R P R T P P T R T
+R R E T R T T T E R
+P P E P P P P R P R
+P P T E P R E P P T
+E R P P E T R E P T
+R E T R P E T E P E
+P R E T P T R P P E
+E E R E E T P T E T
+T P T P T T T R P E
