@@ -1,8 +1,8 @@
 K: 3
-P E T E P T T
-E P R T E T P
-T R T R R T R
-E T T P E P P
-P P E R P R T
-E P T P P T T
-T R E P P R R
+P T R R R E T
+E P E T E P R
+P E E T P P E
+T R T T E E P
+P R R R E E P
+R E P R T E E
+R T T R E E P

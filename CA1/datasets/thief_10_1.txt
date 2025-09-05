@@ -1,11 +1,11 @@
 K: 5
-T T T T T T T E R T
-T T T R T T T T T E
-T P T T P P E T T T
-T T R T T T T T T T
-T T T T E T T P T T
-T T T T T T T E T R
-R T R T T T T T T T
-R P T P T T T P T T
-P T E T E R E T T T
-E T T R T P T R T T
+T T T T T E T P T T
+T P T T T R T T T T
+E T T E P T R T T T
+T T T T E R T T P E
+T T T T P T T T T T
+R T T E T R T T R T
+E T E T P T T T T T
+T T E T T T T T T T
+T T T P T E T E E E
+E T T T T P T T T T
