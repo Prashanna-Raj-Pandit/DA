@@ -1,6 +1,6 @@
 K: 2
-P P R P P
-R P P R T
-R R P P P
-P P P P P
+T P P P P
+T P P P P
+R P P P E
+P E P P P
 P P E P P

@@ -53,8 +53,8 @@ def create_datasets(sizes, trials=3):
                 current_weights = bias_weights[bias]
                 grid = [[random.choices(elements, weights=current_weights)[0] for _ in range(size)] for _ in
                         range(size)]
-                K = size // 2  # Fixed K value for main experiments
-
+                K = size //2  # Fixed K value for main experiments
+                # K=1
                 filename = f'datasets/{bias}_{size}_{trial}.txt'
                 with open(filename, 'w') as f:
                     f.write(f"K: {K}\n")
@@ -78,30 +78,6 @@ def grid_display(grid):
     for r in grid:
         print(' '.join(r))
     print()
-# ASCII art style display
-# def grid_display(grid, title="GRID LAYOUT"):
-#     """
-#     Display grid with ASCII art style
-#     """
-#     rows = len(grid)
-#     cols = len(grid[0]) if rows > 0 else 0
-#
-#     print(f"\n╔{'═' * (cols * 4 + 1)}╗")
-#     print(f"║ {title.center(cols * 4 - 1)} ║")
-#     print(f"╠{'═' * (cols * 4 + 1)}╣")
-#
-#     for i, row in enumerate(grid):
-#         if i > 0:
-#             print(f"╟{'┼'.join(['───'] * cols)}╢")
-#
-#         row_str = "║"
-#         for cell in row:
-#             row_str += f" {cell} │"
-#         row_str = row_str[:-1] + "║"  # Remove last │
-#         print(row_str)
-#
-#     print(f"╚{'═' * (cols * 4 + 1)}╝")
-#     print()
 
 def implement_greedy_approach(M, K):
     start_time = time.time()
@@ -714,11 +690,12 @@ def plot_experiment3_results():
     plt.savefig(os.path.join(RESULTS_DIR, 'Correlation_Matrix.png'), dpi=300, bbox_inches='tight')
     plt.close()
 def main():
-    grid_sizes = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    grid_sizes=np.arange(5,21,1)
+    grid_sizes=grid_sizes.tolist()
     trials = 2
     print(">>Welcome to the Policemen Catching Thieves Program!")
     print("\n" + "*" * 50)
-    print("\tMain Assignment: Varying K Values")
+    print("\tMain Assignment: Modification,1,3, and 4 with Fixed K value")
     print("*" * 50)
 
     # Create all datasets
