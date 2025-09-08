@@ -1,0 +1,16 @@
+K: 7
+X X X X R X P T X T X X X X X
+R X X X X X X X X T X X X X X
+P X X X X X X X X X X X X X X
+X X X X X R X R P T X P X X X
+T X X X P X P X X X P X X X X
+R R X T R X X X X X X X X P T
+X X T X R P X X R X X P X X X
+X T X X X X P P P X X R X X X
+X X X X X R T X X X P R P P T
+T P X X X T X X X X P X X T X
+X X X R X X P X X X R X P T X
+P R X X T X X X R X X X X X X
+P X X X X X X X X P P R T X X
+T R X X X X T P R X X X X X X
+X X X R R P T X X X X X T X X

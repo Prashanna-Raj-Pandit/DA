@@ -1,0 +1,21 @@
+K: 10
+P P X X P T X X R P T R P T P P T X R P
+X T X R R T T P P P P X T X X R P R X R
+X R R R X P P X P X R T R X P R R T T T
+T R X X R T R X R X T T T R X T R T R T
+T R T X P P P T P R T T X R P T T P P T
+P P T P T P R R P X T P R P R P T T R R
+P X P P R P T X R R R R X T R X X P X R
+T X X X X T P P T R X T P T P X R P R P
+X R T R R X X T T R X X T T R X X T T R
+P P T P R T R T P T R X T T X R T X X T
+R T T X X X R P R P X P X T R R R P R T
+R X X X T T R X P X R X P X P R X X X P
+X X X R P T X T T X X X R X R P R T R X
+X X R T T T P R X R T P R X R P R T R R
+X P P T X X R T X X X X T X T T R R R P
+T R X P X R X R R T T P R X X T P T X X
+R T T X X R P R P T T R X P X T R R R T
+R R R T T R T T X X P P R T R R P P X R
+R X R P X R X P X R P P P X R T X P P X
+P T R P R X R P X P T P T T P R T R P P

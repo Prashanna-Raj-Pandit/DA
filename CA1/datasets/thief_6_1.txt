@@ -1,7 +1,0 @@
-K: 3
-T T T T T E
-E T T P T T
-T E T T T E
-T T T T T T
-T T T T T T
-T T T T T T

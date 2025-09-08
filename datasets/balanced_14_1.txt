@@ -1,0 +1,15 @@
+K: 7
+P T P T R P R R T P R E R P
+P T T E R T T P T R E P E T
+R T T P P T R R E P P R T R
+T T E P R E P E E P R R P R
+E R R P T R P E R E E E T E
+R E P E T T R E T P P P R P
+T R T R T P P E P P R P T P
+E T P R T T P P T T E P P E
+R E P E P P T R E E T E R T
+R R P E T R T R T T E T R R
+R T T R E E T R E P E P R R
+T T T P R P T T R T T R T E
+P R R P E E R T E T T P E T
+T E T T P R E E P E P P T R

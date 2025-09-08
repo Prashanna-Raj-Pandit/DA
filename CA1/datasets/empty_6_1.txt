@@ -1,0 +1,7 @@
+K: 3
+X T R T X X
+X X X T X X
+X T X X X X
+P R X X X X
+T X X T X X
+T X X R X X

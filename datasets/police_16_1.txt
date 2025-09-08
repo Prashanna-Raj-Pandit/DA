@@ -1,0 +1,17 @@
+K: 8
+E T T R P T P P P T P E E P P P
+R T P E P P P P T P R P E P P E
+P P P P P P P E P P P P R E P P
+P E E P P P P P P E R P P T T P
+T E R E P P P P P P P P T P P E
+P P P T P R T P P P P T P E P P
+P P P R R P P P T P P P P P P P
+T P R P R E R P R P P P E E P E
+P P P T R P P T P P P T T P T T
+E R P P E P P P P T P P P P T T
+P T T P P P T P P P P P P P P P
+E R E P P P P P P P P T P E E P
+P E P P P E P P P T P T P T P P
+E P P P P R R P R T T P T P P E
+P P P P P P P P P P E P P P P P
+P P P P T P E P T P P R P P P T

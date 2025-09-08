@@ -1,0 +1,10 @@
+K: 4
+X X X X R X R X X
+X T X X X T X P X
+X P X X X X X X X
+P T X X P X X X R
+X X X X X X X X X
+X P X T X X X X X
+R R R X R X P P X
+T X X X X X X R R
+T T T R P X X X X

@@ -1,11 +1,11 @@
 K: 4
-T T E E P E E P R T
-E R R E E P P P R R
-R E R E P E P E T R
-T P E T R T T T T E
-R P E R E R E P R E
-R E T E T E R T E E
-T E P P T E R E E P
-R T R P R P E T T P
-T E P R E R E T T T
-T R R R P R P R E P
+X X P X R P T X T X
+P X X P T T R T T R
+P T P T T X R P T X
+P R P P T R T P R X
+T X X R R P T X R P
+R T R T X R X X R R
+P T R P R T T R X X
+P R R T T T X X X R
+T P T P P P R R T T
+P P T P R P P R X P

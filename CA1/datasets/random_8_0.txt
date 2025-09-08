@@ -1,9 +1,0 @@
-K: 4
-T P P P E E T E
-P E T T E E P R
-R T T E R R P R
-P R P T T E E E
-T P E E R E T E
-P E R T E T P T
-P T R E R P T E
-R P R E T P R E

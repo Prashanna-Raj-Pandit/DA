@@ -1,0 +1,12 @@
+K: 5
+R R R E R P E R R R R
+R R R R R T R R R R R
+T R R R R R R R R R R
+R P T R R R R R T R R
+R R R T R R T R R P R
+R R R R T E R R R R R
+T R R R R R R R T E T
+R R R R R E T E R R T
+R R R T R R R R E T R
+R P R R T R R R R R P
+T E R P T R R R R R E

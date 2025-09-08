@@ -1,75 +1,87 @@
+# Name: Prashanna Raj Pandit
+# Coding Assignment 1 - Policemen Catching Thieves
+# Modifications 1 :policemen catch thieves in the same column
+# Modification 3: set of three adjacent rookies catch a thief
+# Modification 4: (Extra Credit) Policeman can catch a thief within the distanceK
+
+import csv
 import random
 import time
 import os
-import json
+import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from itertools import combinations
-from copy import deepcopy
 
 # Constants
-K_VALUES = [5, 6, 7, 8, 9, 10]
-SAMPLE = 1
-BALANCED_WEIGHTS = [0.25, 0.25, 0.25, 0.25]
+K_Distance = [1, 2, 3, 4, 5, 6, 7]  # maximum allowed distance police can move
+SAMPLE = 5  # Number of samples/grids to generate per configuration
+BALANCED_WEIGHTS = [0.25, 0.25, 0.25, 0.25]  # Uniform distribution weights (all elements equally likely)
 FIXED_GRID_DATASET_DIR = 'datasets/k_distance'
-RESULTS_DIR = 'results'
+metrics_DIR = 'metrics'
+grid_dimensions = np.arange(5, 21, 1)  # Range of grid dimensions from 5x5 up to 20x20
+grid_dimensions = grid_dimensions.tolist()
+trials = 2  # Number of trials to run for each main assignment configuration
+fixed_dimension = 10  # Fixed grid dimension for K experiment
 
-# Elements and bias weights
-elements = ['P', 'T', 'R', 'E']
-bias_weights = {
-    "police": [0.7, 0.1, 0.1, 0.1],
-    "thief": [0.1, 0.7, 0.1, 0.1],
-    "rookie": [0.1, 0.1, 0.7, 0.1],
-    "random": [0.25, 0.25, 0.25, 0.25]
+# Elements and biased weights
+elements = ['P', 'T', 'R', 'X']  # P = Police, T = Thief, R = Rookie squad, X = Empty space
+distribution = {
+    "police": [0.7, 0.1, 0.1, 0.1],  # Heavily biased toward placing Police
+    "empty": [0.1, 0.1, 0.1, 0.7],  # Mostly empty spaces
+    "rookie": [0.1, 0.1, 0.7, 0.1],  # Mostly Rookies
+    "balanced": [0.25, 0.25, 0.25, 0.25]  # Equal chance for all elements
 }
 
-# Global variables
-results = {
-    'police': {'size': [], 'g_runtime': [], 'b_runtime': [], 'g_caught': [], 'b_caught': []},
-    'thief': {'size': [], 'g_runtime': [], 'b_runtime': [], 'g_caught': [], 'b_caught': []},
-    'random': {'size': [], 'g_runtime': [], 'b_runtime': [], 'g_caught': [], 'b_caught': []},
-    'rookie': {'size': [], 'g_runtime': [], 'b_runtime': [], 'g_caught': [], 'b_caught': []}
+metrics = {
+    profile: {
+        'dimension': [], 'g_exe_time': [], 'b_exe_time': [],
+        'g_caught': [], 'b_caught': []
+    }
+    for profile in distribution.keys()
 }
 
 datasets = {
-    'k_distance': {k: [] for k in K_VALUES}
+    'k_distance': {k: [] for k in K_Distance}
 }
 
 
-def create_datasets(sizes, trials=3):
-    global datasets, bias_weights
+def create_datasets(dimensions, trials=3):
+    global datasets, distribution
 
     if not os.path.exists('datasets'):
         os.makedirs('datasets')
     if not os.path.exists(FIXED_GRID_DATASET_DIR):
         os.makedirs(FIXED_GRID_DATASET_DIR)
 
-    # Create datasets for each bias and size
-    for size in sizes:
-        for bias in results.keys():
-            datasets[f'{bias}_{size}'] = []
+    # Create datasets for each biased and dimension
+    for dimension in dimensions:
+        for biased in metrics.keys():
+            datasets[f'{biased}_{dimension}'] = []
             for trial in range(trials):
-                current_weights = bias_weights[bias]
-                grid = [[random.choices(elements, weights=current_weights)[0] for _ in range(size)] for _ in
-                        range(size)]
-                K = random.randint(1, max(2, size // 3))
-                filename = f'datasets/{bias}_{size}_{trial}.txt'
+                current_weights = distribution[biased]
+                grid = [[random.choices(elements, weights=current_weights)[0] for _ in range(dimension)] for _ in
+                        range(dimension)]
+                K = dimension // 2  # Fixed K value for main experiments
+                # K=1
+                filename = f'datasets/{biased}_{dimension}_{trial}.txt'
                 with open(filename, 'w') as f:
                     f.write(f"K: {K}\n")
                     for row in grid:
                         f.write(' '.join(row) + '\n')
-                datasets[f'{bias}_{size}'].append((grid, K))
+                datasets[f'{biased}_{dimension}'].append((grid, K))
 
-    # Extra Credit Experiment datasets (fixed size, varying K)
-    size = 10  # Fixed grid size for K experiment
-    for K in K_VALUES:
-        for sample in range(SAMPLE):
-            grid = [[random.choices(elements, weights=BALANCED_WEIGHTS)[0] for _ in range(size)] for _ in range(size)]
-            filename = os.path.join(FIXED_GRID_DATASET_DIR, f'k_distance_{K}_sample{sample}.txt')
-            with open(filename, 'w') as f:
-                f.write(f"K: {K}\n")
+
+def fixed_dataset(datasets):
+    # Extra Credit Experiment datasets (fixed dimension, varying K)
+    for k in K_Distance:
+        for s in range(SAMPLE):
+            grid = [[random.choices(elements, weights=BALANCED_WEIGHTS)[0] for _ in range(fixed_dimension)] for _ in
+                    range(fixed_dimension)]
+            file = os.path.join(FIXED_GRID_DATASET_DIR, f'k_distance_{k}_sample{s}.txt')
+            with open(file, 'w') as f:
+                f.write(f"K: {k}\n")
                 f.write('\n'.join(' '.join(row) for row in grid))
-            datasets['k_distance'][K].append((grid, K))
+            datasets['k_distance'][k].append((grid, k))
 
 
 def grid_display(grid):
@@ -78,31 +90,23 @@ def grid_display(grid):
     print()
 
 
-def implement_greedy_approach(M, K):
-    start_time = time.time()
+def implement_greedy_approach(M, K, dir):
+    grid = [r.copy() for r in M]
+    start_time = time.perf_counter()
     caught = 0
-    grid = [row[:] for row in M]
-    catch_log = []
-
+    logs = []
     rows, cols = len(grid), len(grid[0])
-
-    # Process each column for police catching thieves in the same column
+    # Process each column for police catching  in the same column
     for col in range(cols):
-        police_positions = []
-        thief_positions = []
+        # Collect all police and  in this column
+        police_positions = [row_idx for row_idx in range(rows) if grid[row_idx][col] == 'P']
+        thief_positions = [row_idx for row_idx in range(rows) if grid[row_idx][col] == 'T']
 
-        # Collect all police and thieves in this column
-        for row in range(rows):
-            if grid[row][col] == 'P':
-                police_positions.append(row)
-            elif grid[row][col] == 'T':
-                thief_positions.append(row)
-
-        # Sort positions for optimal matching
+        # Sort positions
         police_positions.sort()
         thief_positions.sort()
 
-        # Use two pointers to match police with thieves
+        # Use two pointers to match police with
         p_idx = t_idx = 0
         while p_idx < len(police_positions) and t_idx < len(thief_positions):
             police_row = police_positions[p_idx]
@@ -112,7 +116,7 @@ def implement_greedy_approach(M, K):
             if distance <= K:
                 caught += 1
                 grid[thief_row][col] = 'C'  # Mark as caught
-                catch_log.append(f">>Thief at ({thief_row}, {col}) was caught by Police at ({police_row}, {col})")
+                logs.append(f">>Thief at ({thief_row}, {col}) was caught by Police at ({police_row}, {col})")
                 p_idx += 1
                 t_idx += 1
             elif police_row < thief_row:
@@ -120,109 +124,204 @@ def implement_greedy_approach(M, K):
             else:
                 t_idx += 1
 
-    # Process rookies catching thieves (3 rookies needed)
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    # Process rookies catching  (3 rookies needed)
+    caught = rookie_catch_greedy(caught, cols, dir, grid, logs, rows)
 
+    return caught, time.perf_counter() - start_time, logs
+
+
+def rookie_catch_greedy(caught, cols, dir, M, logs, rows):
     for i in range(rows):
         for j in range(cols):
-            if grid[i][j] == 'T':  # Only process thieves that haven't been caught
-                adjacent_rookies = []
+            if M[i][j] == 'T':  # Only process  that haven't been caught
+                nearby_rookies = []
 
                 # Check all four directions for rookies
-                for dx, dy in directions:
+                for dx, dy in dir:
                     ni, nj = i + dx, j + dy
                     if (0 <= ni < rows and 0 <= nj < cols and
-                            grid[ni][nj] == 'R'):
-                        adjacent_rookies.append((ni, nj))
+                            M[ni][nj] == 'R'):
+                        nearby_rookies.append((ni, nj))
 
                 # If at least 3 rookies are adjacent, catch the thief
-                if len(adjacent_rookies) >= 3:
+                if len(nearby_rookies) >= 3:
                     caught += 1
-                    grid[i][j] = 'C'  # Mark thief as caught
+                    M[i][j] = 'C'  # Mark thief as caught
 
                     # Use the first 3 rookies and mark them as used
-                    used_rookies = adjacent_rookies[:3]
+                    used_rookies = nearby_rookies[:3]
                     for r_i, r_j in used_rookies:
-                        grid[r_i][r_j] = 'U'  # Mark rookie as used
+                        M[r_i][r_j] = 'U'  # Mark rookie as used
 
-                    catch_log.append(f">>Thief at ({i}, {j}) was caught by Rookies at {used_rookies}")
+                    logs.append(f">>Thief at ({i}, {j}) was caught by Rookies at {used_rookies}")
+    return caught
 
-    return caught, time.time() - start_time, catch_log
 
-
-def implement_brute_force_approach(matrix, dist_limit):
-    t0 = time.time()
+def implement_brute_force_approach(matrix, dist, dir):
+    t0 = time.perf_counter()
     board = [row.copy() for row in matrix]
     log_entries = []
 
-    # --- Police vs Thieves ---
+    # --- Police vs  ---
     P_caught = 0
     n_rows, n_cols = len(board), len(board[0])
     for c in range(n_cols):
         P = [r for r in range(n_rows) if board[r][c] == 'P']
         robbers = [r for r in range(n_rows) if board[r][c] == 'T']
-        matched_P, matched_thieves = set(), set()
+        matched_P, matched_ = set(), set()
         for cop in P:
             for thief in robbers:
-                if abs(cop - thief) <= dist_limit and cop not in matched_P and thief not in matched_thieves:
+                if abs(cop - thief) <= dist and cop not in matched_P and thief not in matched_:
                     P_caught += 1
                     matched_P.add(cop)
-                    matched_thieves.add(thief)
+                    matched_.add(thief)
                     log_entries.append(f">>Thief at ({thief}, {c}) was caught by Police at ({cop}, {c})")
                     break
 
     # --- Rookie squads ---
-    caught_by_rookies = 0
-    neighbor_offsets = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-    thief_cells = [(r, c) for r in range(n_rows) for c in range(n_cols) if board[r][c] == 'T']
-
-    for tr, tc in thief_cells:
-        nearby_rookies = []
-        for dr, dc in neighbor_offsets:
-            nr, nc = tr + dr, tc + dc
-            if 0 <= nr < n_rows and 0 <= nc < n_cols and board[nr][nc] == 'R':
-                nearby_rookies.append((nr, nc))
-
-        if len(nearby_rookies) >= 3:
-            for triple in combinations(nearby_rookies, 3):
-                if all(board[r][c] == 'R' for r, c in triple):
-                    caught_by_rookies += 1
-                    for r, c in triple:
-                        board[r][c] = 'U'
-                    log_entries.append(f">>Thief at ({tr}, {tc}) caught by Rookies at {triple}")
-                    break
+    caught_by_rookies = rookie_catch_brute(board, dir, log_entries, n_cols, n_rows)
 
     total_caught = P_caught + caught_by_rookies
     elapsed = time.time() - t0
     return total_caught, elapsed, log_entries
 
 
+def rookie_catch_brute(M, dir, log_entries, n_cols, n_rows):
+    caught_by_rookies = 0
+    thief_cells = [(r, c) for r in range(n_rows) for c in range(n_cols) if M[r][c] == 'T']
+    for tr, tc in thief_cells:
+        nearby_rookies = []
+        for dr, dc in dir:
+            nr, nc = tr + dr, tc + dc
+            if 0 <= nr < n_rows and 0 <= nc < n_cols and M[nr][nc] == 'R':
+                nearby_rookies.append((nr, nc))
+
+        if len(nearby_rookies) >= 3:
+            for triple in combinations(nearby_rookies, 3):
+                if all(M[r][c] == 'R' for r, c in triple):
+                    caught_by_rookies += 1
+                    for r, c in triple:
+                        M[r][c] = 'U'
+                    log_entries.append(f">>Thief at ({tr}, {tc}) caught by Rookies at {triple}")
+                    break
+    return caught_by_rookies
+
+
 def PP_ca1(M, K):
-    g_count, g_time, g_log = implement_greedy_approach(M, K)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    g_count, g_time, g_log = implement_greedy_approach(M, K, directions)
     print("Greedy Solution:")
     for log in g_log:
         print(f">>{log}")
-    print(f">>Total Thieves Caught: {g_count}")
+    print(f">>Total  Caught: {g_count}")
 
-    b_count, b_time, b_log = implement_brute_force_approach(M, K)
+    b_count, b_time, b_log = implement_brute_force_approach(M, K, directions)
     print("Brute-force Solution:")
     for log in b_log:
         print(f">>{log}")
-    print(f">>Total Thieves Caught: {b_count}")
+    print(f">>Total  Caught: {b_count}")
     return [(g_count, g_time), (b_count, b_time)]
 
 
-def save_results(results_dict):
+def extra_credit_exp():
+    """Extra Credit Experiment: with varying K values"""
+    print("\n" + "#" * 70)
+    print("\tExtra Credit Experiment: Varying K Values")
+    print("#" * 70)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    if not os.path.exists(metrics_DIR):
+        os.makedirs(metrics_DIR)
+
+    csv_path = os.path.join(metrics_DIR, 'experiment3_metrics.csv')
+    fixed_dataset(datasets)
+    # Open CSV once and write header
+    with open(csv_path, mode='w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            'K', 'sample',
+            'greedy_time', 'brute_time',
+            'greedy_caught', 'brute_caught',
+            'greedy_police', 'greedy_rookie',
+            'brute_police', 'brute_rookie'
+        ])
+
+        for K in K_Distance:
+            for sample, (grid, _) in enumerate(datasets['k_distance'][K]):
+                if sample == 0:  # Printing only first sample
+                    print(f"\n>>Processing 10x10 grid (K={K})")
+                    grid_display(grid)
+
+                # Run both approaches
+                g_count, g_time, g_log = implement_greedy_approach([row[:] for row in grid], K, directions)
+                b_count, b_time, b_log = implement_brute_force_approach([row[:] for row in grid], K, directions)
+                # Count police vs rookie catches and extract details
+                g_police_logs = [log for log in g_log if "Police" in log]
+                g_rookie_logs = [log for log in g_log if "Rookies" in log]
+                g_police = len(g_police_logs)
+                g_rookie = len(g_rookie_logs)
+
+                b_police_logs = [log for log in b_log if "Police" in log]
+                b_rookie_logs = [log for log in b_log if "Rookies" in log]
+                b_police = len(b_police_logs)
+                b_rookie = len(b_rookie_logs)
+
+                # Print detailed metrics for the first sample of each K value
+                if sample == 0:
+                    print(f"\n>> K = {K} - Greedy Approach Method:")
+                    if g_police > 0:
+                        print(f">> Police catches ({g_police} ):")
+                        for log in g_police_logs:
+                            # Extract and reformat the message
+                            message = log.replace(">>Thief at (", "").replace(") was caught by Police at (",
+                                                                              " catch Thief at (")
+                            message = message.replace(")", "").replace(", ", ",")
+                            parts = message.split(" catch Thief at ")
+                            police_pos = parts[0].replace(",", ",")
+                            thief_pos = parts[1].replace(",", ",")
+                            print(f">> Police at ({thief_pos}) catch Thief at ({police_pos})")
+
+                    if g_rookie > 0:
+                        print(f">> Rookie squad catches ({g_rookie} ):")
+                        for log in g_rookie_logs:
+                            print(f">> {log}")
+
+                    print(f"\n>> K = {K} - Brute Force Approach Method:")
+                    if b_police > 0:
+                        print(f">> Police catches ({b_police} ):")
+                        for log in b_police_logs:
+                            # Extract and reformat the message
+                            message = log.replace(">>Thief at (", "").replace(") was caught by Police at (",
+                                                                              " catch Thief at (")
+                            message = message.replace(")", "").replace(", ", ",")
+                            parts = message.split(" catch Thief at ")
+                            police_pos = parts[0].replace(",", ",")
+                            thief_pos = parts[1].replace(",", ",")
+                            print(f">> Police at ({thief_pos}) catch Thief at ({police_pos})")
+
+                    if b_rookie > 0:
+                        print(f">> Rookie squad catches ({b_rookie} ):")
+                        for log in b_rookie_logs:
+                            print(f">> {log}")
+                writer.writerow([
+                    K, sample,
+                    g_time, b_time,
+                    g_count, b_count,
+                    g_police, g_rookie,
+                    b_police, b_rookie
+                ])
+
+
+def save_metrics(metrics_dict):
     # Convert the dictionary to a list of records
     records = []
-    filename = "results.csv"
-    for bias, data in results_dict.items():
-        for i in range(len(data['size'])):
+    filename = os.path.join(metrics_DIR, "metrics.csv")
+    for biased, data in metrics_dict.items():
+        for i in range(len(data['dimension'])):
             records.append({
-                'Bias': bias,
-                'Size': data['size'][i],
-                'g_runtime': data['g_runtime'][i],
-                'b_runtime': data['b_runtime'][i],
+                'biased': biased,
+                'dimension': data['dimension'][i],
+                'g_exe_time': data['g_exe_time'][i],
+                'b_exe_time': data['b_exe_time'][i],
                 'g_caught': data['g_caught'][i],
                 'b_caught': data['b_caught'][i]
             })
@@ -230,121 +329,56 @@ def save_results(results_dict):
     # Create DataFrame and save to CSV
     df = pd.DataFrame(records)
     df.to_csv(filename, index=False)
-    print(f"Results saved to {filename}")
+    print(f"metrics saved to {filename}")
 
-    # Also save separate files for each bias
-    for bias in results_dict.keys():
-        bias_df = df[df['Bias'] == bias]
-        bias_df.to_csv(f"results_{bias}.csv", index=False)
-
-def visualize_results(results_data):
-    colors = {
-        'random': 'blue',
-        'police': 'green',
-        'rookie': 'red',
-        'thief': 'purple'
-    }
-
-    # Individual plots for each bias
-    for bias in results_data.keys():
-        data = results_data[bias]
-        sizes = data['size']
-
-        plt.figure(figsize=(10, 5))
-        plt.plot(sizes, data['g_runtime'], label='Greedy Time', marker='o')
-        plt.plot(sizes, data['b_runtime'], label='Brute Time', marker='x')
-        plt.title(f'Execution Time vs Grid Size ({bias} bias)')
-        plt.xlabel('Grid Size')
-        plt.ylabel('Time (s)')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig(f"Execution_Time_vs_Grid_Size_{bias}_bias.png")
-        plt.close()
-
-        plt.figure(figsize=(10, 5))
-        plt.plot(sizes, data['g_caught'], label='Greedy Caught', marker='o')
-        plt.plot(sizes, data['b_caught'], label='Brute Caught', marker='x')
-        plt.title(f'Thieves Caught vs Grid Size ({bias} bias)')
-        plt.xlabel('Grid Size')
-        plt.ylabel('Thieves Caught')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig(f"Thieves_Caught_vs_Grid_Size_{bias}_bias.png")
-        plt.close()
-
-    # Combined plot: Execution time
-    plt.figure(figsize=(12, 6))
-    for bias in ['random', 'police', 'rookie', 'thief']:
-        data = results_data[bias]
-        sizes = data['size']
-        plt.plot(sizes, data['g_runtime'], label=f'{bias} (Greedy)', color=colors[bias], linestyle='-', marker="o")
-        plt.plot(sizes, data['b_runtime'], label=f'{bias} (Brute)', color=colors[bias], linestyle='--', marker="x")
-    plt.title('Execution Time Comparison Across Biases')
-    plt.xlabel('Grid Size')
-    plt.ylabel('Time (s)')
-    plt.legend()
-    plt.grid(True)
-    plt.savefig("Execution_Time_Comparison_Across_Biases.png")
-    plt.close()
-
-    # Combined plot: Thieves caught
-    plt.figure(figsize=(12, 6))
-    for bias in ['random', 'police', 'rookie', 'thief']:
-        data = results_data[bias]
-        sizes = data['size']
-        plt.plot(sizes, data['g_caught'], label=f'{bias} (Greedy)', color=colors[bias], linestyle='-', marker="o")
-        plt.plot(sizes, data['b_caught'], label=f'{bias} (Brute)', color=colors[bias], linestyle='--', marker="x")
-    plt.title('Thieves Caught Comparison Across Biases')
-    plt.xlabel('Grid Size')
-    plt.ylabel('Thieves Caught')
-    plt.legend()
-    plt.grid(True)
-    plt.savefig("Thieves_Caught_Comparison_Across_Biases.png")
-    plt.close()
+    # Also save separate files for each biased
+    for biased in metrics_dict.keys():
+        biased_df = df[df['biased'] == biased]
+        path = os.path.join(metrics_DIR, f"metrics_{biased}.csv")
+        biased_df.to_csv(path, index=False)
 
 
-def main():
-    grid_sizes = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    trials = 2
-    print(">>Welcome to the Policemen Catching Thieves Program!")
-    print("\n" + "*" * 50)
-    print("\tMain Assignment: Varying K Values")
-    print("*" * 50)
-
-    # Create all datasets
-    create_datasets(grid_sizes, trials=trials)
-
-    # Run main experiments
-    for size in grid_sizes:
-        print(f"\n>>Running experiments for grid size {size}x{size}")
-        for bias in results.keys():
+def main_assignment():
+    for dimension in grid_dimensions:
+        print(f"\n>>Running experiments for grid dimension {dimension}x{dimension}")
+        for biased in metrics.keys():
             print(">>")
-            if bias == "random":
-                print(f">>Processing Random grids.")
+            if biased == "balanced":
+                print(f">>Processing balanced grids.")
             else:
-                print(f">>Processing {bias} bias.")
-            g_runtimes = []
-            b_runtimes = []
+                print(f">>Processing {biased} biased.")
+            g_exe_time = []
+            b_exe_time = []
             greedy_counts = []
             brute_counts = []
-            for idx, (grid, K) in enumerate(datasets[f'{bias}_{size}']):
-                print(f"\nGrid {idx + 1} (Bias: {bias}, Size: {size}x{size}, K: {K}):")
+            for idx, (grid, K) in enumerate(datasets[f'{biased}_{dimension}']):
+                print(f"\nGrid {idx + 1} (biased: {biased}, dimension: {dimension}x{dimension}, K: {K}):")
                 grid_display(grid)
                 values = PP_ca1(grid, K)
                 greedy_counts.append(values[0][0])
-                g_runtimes.append(values[0][1])
+                g_exe_time.append(values[0][1])
                 brute_counts.append(values[1][0])
-                b_runtimes.append(values[1][1])
+                b_exe_time.append(values[1][1])
 
-            results[bias]['size'].append(size)
-            results[bias]['g_runtime'].append(sum(g_runtimes) / len(g_runtimes))
-            results[bias]['b_runtime'].append(sum(b_runtimes) / len(b_runtimes))
-            results[bias]['g_caught'].append(sum(greedy_counts) / len(greedy_counts))
-            results[bias]['b_caught'].append(sum(brute_counts) / len(brute_counts))
+            metrics[biased]['dimension'].append(dimension)
+            metrics[biased]['g_exe_time'].append(sum(g_exe_time) / len(g_exe_time))
+            metrics[biased]['b_exe_time'].append(sum(b_exe_time) / len(b_exe_time))
+            metrics[biased]['g_caught'].append(sum(greedy_counts) / len(greedy_counts))
+            metrics[biased]['b_caught'].append(sum(brute_counts) / len(brute_counts))
 
-    # Save results and create visualizations
-    visualize_results(results)
-    save_results(results)
+
+def main():
+    print(">>Welcome to the Policemen Catching  Program!")
+    print("\n" + "#" * 70)
+    print("\tMain Assignment: Modification,1,3, and 4 with Fixed K value")
+    print("#" * 70)
+    # Create all datasets
+    create_datasets(grid_dimensions, trials=trials)
+    # Run main experiments
+    main_assignment()
+    # Run K-distance experiment
+    extra_credit_exp()
+    save_metrics(metrics)
 
 
 if __name__ == '__main__':

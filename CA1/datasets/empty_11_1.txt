@@ -1,0 +1,12 @@
+K: 5
+P X X T X X X X X X X
+X X X X X R T X X X X
+X T X X X X X P T X P
+X P T X X P X X X X X
+T P X X X X T X X T X
+X R T T T X P R X X X
+X P T X X X R X X X R
+R X P X P T X X T X X
+X X X X P X X R X X T
+X R R X X T X P X P P
+X X R X X X X X P X P

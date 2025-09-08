@@ -1,0 +1,19 @@
+K: 9
+P P X X T P P T T R T R T P R X P X
+T P X P P P R R T X X R P X P P T P
+T X X R X P T X X P R T R T P T R P
+X X X R T X P P X R X X P T R R X P
+R X T R T P P P X T X R R T T R T R
+T R T R X R R X T R X T P R T R X R
+P X T X P T P R T P R T P P X R T R
+T X P T X X R P T T T R X P P R X P
+T X R P T P T T P P T X R T P T P R
+P T X R P P T T R T X X T P X T R P
+X T T P X P X T R T X R P R P P P X
+P X T X P R T P R R P P X P X R P P
+T P P X X T T T P P R T X T X T T T
+X X P R T P X R X R R P X P X P T T
+P R P T P R X T R X R R R X R R R P
+T R T P X X T R T P P T X T P X R P
+X R X T P T T T T X R P P R R X X X
+R X X R X P X T R X X T R T X R R X

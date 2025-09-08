@@ -1,0 +1,14 @@
+K: 6
+X X T P X R R X P T X X P
+X X T T X X X T P X X T R
+X R X P X X X X X X X R R
+T X X X X X X X P X X R R
+R T R P X X P X X X X X T
+X R R X T X X X X X X X P
+X X T X P X R X X R R P X
+T X P X X X X X X X X T X
+X R T P X X X X X X T T X
+X X X X X X X X X X X X R
+P T X X P P X R X R X X X
+X X X X X X R X T X X X X
+X T X R X T X X P X X P X
