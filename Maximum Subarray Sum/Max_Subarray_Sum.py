@@ -19,7 +19,7 @@ def find_max_crossing_subarray(A, low, mid, high):
             right_sum = total
             max_right = j
 
-    return (max_left, max_right, left_sum + right_sum)
+    return max_left, max_right, left_sum + right_sum
 
 
 def find_maximum_subarray(A, low, high):
@@ -43,7 +43,8 @@ def find_maximum_subarray(A, low, high):
         return (cross_low, cross_high, cross_sum)
 
 
-# Example usage
-A = [2, -4, 3, 5, -1, 2, -6, 4]
+# A = [2, -4, 3, 5, -1, 2, -6, 4]
+A = [-2, -5, 6, -2, -3, 1, 5, -6]
 low, high, max_sum = find_maximum_subarray(A, 0, len(A) - 1)
-print(f"Maximum subarray: {A[low:high+1]}, Sum = {max_sum}")
+print("Input array: ", A)
+print(f"Maximum subarray: {A[low:high + 1]}, Sum = {max_sum}")

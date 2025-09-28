@@ -10,7 +10,7 @@ import pandas as pd
 import io
 from itertools import combinations
 
-sizes = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024] # Deck size
+sizes = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]  # Deck size
 
 
 def subset_sum_dp(nums, target, indices=None):
@@ -20,10 +20,11 @@ def subset_sum_dp(nums, target, indices=None):
     n = len(nums)
     total = sum(nums)
     target = min(target, total)
+    # DP table: dp[i][j] = True if sum j can be formed using first i items
     dp = [[False for _ in range(target + 1)] for _ in range(n + 1)]
     for i in range(n + 1):
         dp[i][0] = True
-
+    # Fill DP table
     for i in range(1, n + 1):
         for j in range(1, target + 1):
             if nums[i - 1] > j:
@@ -52,10 +53,11 @@ def subset_sum_dp(nums, target, indices=None):
 
 
 def discard_cards_to_value(A, cards, target_value):
-    """Discard cards to reduce sum to target_value or below."""
+    # Discard cards to reduce sum to target_value or below
     current_sum = sum(A[i - 1] for i in cards)
     excluded = []
     while current_sum > target_value and cards:
+        # Remove the smallest card greater than 0
         min_card = min(((A[i - 1], i) for i in cards if A[i - 1] > 0), default=None)
         if not min_card:
             break
@@ -65,8 +67,7 @@ def discard_cards_to_value(A, cards, target_value):
     return cards, excluded
 
 
-def PP_ca3(A, G, favorite):
-    """Main function for Grandma Rosa's card distribution problem."""
+def PP_ca3(A, G, favorite):  # Function for the main assignment where A= list of cards, G= list of grandchild
     grandchildren = ['melanie', 'selena', 'camila']
     favorite = favorite.lower()
     if favorite not in grandchildren:
@@ -88,7 +89,7 @@ def PP_ca3(A, G, favorite):
 
 
 def handle_one_grandchild(A, favorite, grandchildren):
-    """G=1: Assign all cards to the favorite."""
+    # G=1: Assign all cards to the favorite.
     assignments = {child: {'cards': [], 'value': 0} for child in grandchildren}
     assignments[favorite]['cards'] = list(range(1, len(A) + 1))
     assignments[favorite]['value'] = sum(A)
@@ -100,7 +101,7 @@ def handle_one_grandchild(A, favorite, grandchildren):
 
 
 def handle_two_grandchildren(A, favorite, grandchildren):
-    """G=2: Handle both scenarios with and without favorite."""
+    # G=2: Handle both scenarios with and without favorite.
     if len(A) < 2:
         print(">> No distribution is possible (A < G)")
         return {'assignments': {}, 'excluded_cards': [], 'scenario': '2_invalid'}
@@ -119,11 +120,11 @@ def handle_two_grandchildren(A, favorite, grandchildren):
 
 
 def handle_two_with_favorite(A, favorite, other, grandchildren):
-    """Favorite gets higher value than other using DP subset sum."""
+    # Favorite gets higher value than other using DP subset sum.
     total_value = sum(A)
     n = len(A)
     target = total_value // 2
-
+    # Find best split for 'other'
     best_other_sum, other_indices = subset_sum_dp(A, target)
     favorite_cards = [i + 1 for i in range(n) if i not in other_indices]
     other_cards = [i + 1 for i in other_indices]
@@ -131,6 +132,7 @@ def handle_two_with_favorite(A, favorite, other, grandchildren):
     other_value = best_other_sum
 
     excluded_cards = []
+    # Enforce favorite > other by discarding if needed
     if favorite_value <= other_value:
         target_other = favorite_value - 1 if favorite_value > 0 else 0
         other_cards, excluded = discard_cards_to_value(A, other_cards, target_other)
@@ -157,7 +159,7 @@ def handle_two_with_favorite(A, favorite, other, grandchildren):
 
 
 def handle_two_without_favorite(A, child1, child2, grandchildren):
-    """Equal distribution between two children using DP subset sum."""
+    # Equal distribution between two children using DP subset sum.
     total_value = sum(A)
     n = len(A)
     target = total_value // 2
@@ -199,22 +201,27 @@ def handle_two_without_favorite(A, child1, child2, grandchildren):
 
 
 def handle_three_grandchildren(A, favorite, grandchildren):
-    """G=3: Distribute to all, favorite highest, second favorite next."""
+    # G=3: Distribute to all, favorite highest, second favorite next.
     total_value = sum(A)
     n = len(A)
     target = total_value // 3
-
+    # Step 1: Find first group
     sum1, subset1 = subset_sum_dp(A, target)
     remaining = [i for i in range(n) if i not in subset1]
+
+    # Step 2: Find second group from remaining
     rem_vals = [A[i] for i in remaining]
     target2 = sum(rem_vals) // 2 if rem_vals else 0
     sum2, subset2 = subset_sum_dp(rem_vals, target2, remaining)
+
+    # Remaining = third group
     subset3 = [i for i in remaining if i not in subset2]
     sum3 = sum(A[i] for i in subset3)
 
     groups = [(sum1, [i + 1 for i in subset1]), (sum2, [i + 1 for i in subset2]), (sum3, [i + 1 for i in subset3])]
     groups.sort(key=lambda x: x[0], reverse=True)
 
+    # Assign groups to grandchildren in order
     second_favorite = 'selena' if favorite != 'selena' else 'camila'
     third = [child for child in grandchildren if child not in [favorite, second_favorite]][0]
 
@@ -224,6 +231,7 @@ def handle_three_grandchildren(A, favorite, grandchildren):
         third: {'cards': groups[2][1], 'value': groups[2][0]}
     }
 
+    # Enforce fairness (favorite > second > third) with discards
     excluded_cards = []
     # Ensure Melanie > Selena
     if assignments[favorite]['value'] <= assignments[second_favorite]['value']:
@@ -339,8 +347,7 @@ def PP_ec_ca3(A, G):  # Extra credit: Distribute cards equally to G grandchildre
     return True
 
 
-def main_experiments():
-    """Run experiments for FL_ca3 and save results to CSV."""
+def main_experiments():  # Run experiment for the main assignment
     Gs = [1, 2, 3]
     results = []
 
